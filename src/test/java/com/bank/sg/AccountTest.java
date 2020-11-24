@@ -17,13 +17,13 @@ public class AccountTest {
 
 
     @Test
-    public void should_make_deposit() throws OperationAccountException {
+    public void should_add_money() throws OperationAccountException {
         //given
-        Account account = new Account();
+        Account account = BankFactory.createAnAcoountWithCustomBalance(0);
         double amount = 1000;
 
         //when
-        account.makeDeposit(amount);
+        account.addMoney(amount);
 
         //then
         Assertions.assertThat(account.getBalance()).isEqualTo(amount);
@@ -31,14 +31,14 @@ public class AccountTest {
 
 
     @Test
-    public void should_not_make_deposit() throws OperationAccountException {
+    public void should_not_add_money() throws OperationAccountException {
         //given
         Account account = BankFactory.createAnAcoountWithCustomBalance(500);
         double amount = -1000;
 
         //when
         Throwable thrown = catchThrowable(() -> {
-            account.makeDeposit(amount);
+            account.addMoney(amount);
         });
 
         //then
@@ -49,21 +49,21 @@ public class AccountTest {
     }
 
     @Test
-    public void should_make_withdrawal() throws OperationAccountException {
+    public void should_retrieve_money() throws OperationAccountException {
         //given
         Account account = BankFactory.createAnAcoountWithCustomBalance(1000);
         double amount = 300;
 
 
         //when
-        account.makeWithdrawal(amount);
+        account.retreiveMoney(amount);
 
         //then
         assertThat(account.getBalance()).isEqualTo(700);
     }
 
     @Test
-    public void should_not_make_withdrawal_because_insuffisient_funds() {
+    public void should_not_retrieve_money_because_insuffisient_funds() {
         //given
         Account account = BankFactory.createAnAcoountWithCustomBalance(100);
         double amount = 300;
@@ -71,7 +71,7 @@ public class AccountTest {
 
         //when
         Throwable thrown = catchThrowable(() -> {
-            account.makeWithdrawal(amount);
+            account.retreiveMoney(amount);
         });
 
 
@@ -82,7 +82,7 @@ public class AccountTest {
     }
 
     @Test
-    public void should_not_make_withdrawal_because_negative_amount() {
+    public void should_not_retrieve_money_because_negative_amount() {
         //given
         Account account = new Account("1", 1000, new ArrayList<Operation>());
         double amount = -300;
@@ -90,7 +90,7 @@ public class AccountTest {
 
         //when
         Throwable thrown = catchThrowable(() -> {
-            account.makeWithdrawal(amount);
+            account.retreiveMoney(amount);
         });
 
 
@@ -101,11 +101,11 @@ public class AccountTest {
     }
 
     @Test
-    public void should_show_operations_history() throws OperationAccountException {
+    public void should_get_operations() throws OperationAccountException {
         //given
         Account account = BankFactory.createAnAcoountWithCustomBalance(0);
-        account.makeDeposit(1000);
-        account.makeWithdrawal(100);
+        account.addMoney(1000);
+        account.retreiveMoney(100);
 
         //when
         List<Operation> operations = account.getOperations();

@@ -19,14 +19,14 @@ public class Account {
     private double balance;
     private List<Operation> operations;
 
-    public void makeDeposit(double amount) throws OperationAccountException {
+    public void addMoney(double amount) throws OperationAccountException {
         checkAmount(amount);
         balance = balance + amount;
         recordOperation(DEPOSIT, amount);
     }
 
 
-    public void makeWithdrawal(double amount) throws OperationAccountException {
+    public void retreiveMoney(double amount) throws OperationAccountException {
         checkAmount(amount);
         if (amount <= balance) {
             this.balance = balance - amount;
