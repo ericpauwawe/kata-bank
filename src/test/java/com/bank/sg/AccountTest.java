@@ -19,7 +19,7 @@ public class AccountTest {
     @Test
     public void should_add_money() throws OperationAccountException {
         //given
-        Account account = BankFactory.createAnAcoountWithCustomBalance(0);
+        Account account = AccountFactory.createAnAcoountWithCustomBalance(0);
         double amount = 1000;
 
         //when
@@ -33,7 +33,7 @@ public class AccountTest {
     @Test
     public void should_not_add_money() throws OperationAccountException {
         //given
-        Account account = BankFactory.createAnAcoountWithCustomBalance(500);
+        Account account = AccountFactory.createAnAcoountWithCustomBalance(500);
         double amount = -1000;
 
         //when
@@ -51,7 +51,7 @@ public class AccountTest {
     @Test
     public void should_retrieve_money() throws OperationAccountException {
         //given
-        Account account = BankFactory.createAnAcoountWithCustomBalance(1000);
+        Account account = AccountFactory.createAnAcoountWithCustomBalance(1000);
         double amount = 300;
 
 
@@ -65,7 +65,7 @@ public class AccountTest {
     @Test
     public void should_not_retrieve_money_because_insuffisient_funds() {
         //given
-        Account account = BankFactory.createAnAcoountWithCustomBalance(100);
+        Account account = AccountFactory.createAnAcoountWithCustomBalance(100);
         double amount = 300;
 
 
@@ -103,7 +103,7 @@ public class AccountTest {
     @Test
     public void should_get_operations() throws OperationAccountException {
         //given
-        Account account = BankFactory.createAnAcoountWithCustomBalance(0);
+        Account account = AccountFactory.createAnAcoountWithCustomBalance(0);
         account.addMoney(1000);
         account.retreiveMoney(100);
 
